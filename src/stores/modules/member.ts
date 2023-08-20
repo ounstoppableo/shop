@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-
+import type { loginRes } from '@/services/types/login'
 // 定义 Store
 export const useMemberStore = defineStore(
   'member',
   () => {
     // 会员信息
-    const profile = ref<any>()
+    const profile = ref<loginRes>()
 
     // 保存会员信息，登录时使用
-    const setProfile = (val: any) => {
+    const setProfile = (val: loginRes) => {
       profile.value = val
     }
 
@@ -27,6 +27,15 @@ export const useMemberStore = defineStore(
   },
   // TODO: 持久化
   {
-    persist: true,
+    persist: {
+      storage: {
+        getItem(key: string) {
+          return uni.getStorageSync(key)
+        },
+        setItem(key: string, value: string) {
+          uni.setStorageSync(key, value)
+        },
+      },
+    },
   },
 )

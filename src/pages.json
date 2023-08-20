@@ -1,10 +1,19 @@
 {
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      //注册全局组件，重启服务生效
+      "^xxt-(.*)": "@/components/xxt-$1.vue"
+    }
+  },
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -20,9 +29,33 @@
       }
     },
     {
+      "path": "pages/cart/cart2",
+      "style": {
+        "navigationBarTitleText": "购物车"
+      }
+    },
+    {
       "path": "pages/category/category",
       "style": {
         "navigationBarTitleText": "分类"
+      }
+    },
+    {
+      "path": "pages/recommand/recommand",
+      "style": {
+        "navigationBarTitleText": "热门推荐"
+      }
+    },
+    {
+      "path": "pages/detail/detail",
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
       }
     }
   ],
@@ -64,5 +97,93 @@
         "selectedIconPath": "static/tabs/user_selected.png"
       }
     ]
+  },
+  "subPackages": [
+    {
+      "root": "subpages/setting",
+      "pages": [
+        {
+          "path": "setting",
+          "style": {
+            "navigationBarTitleText": "设置"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subpages/profile",
+      "pages": [
+        {
+          "path": "profile",
+          "style": {
+            "navigationBarTitleText": "用户信息"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subpages/address",
+      "pages": [
+        {
+          "path": "address",
+          "style": {
+            "navigationBarTitleText": "收货地址"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subpages/address-form",
+      "pages": [
+        {
+          "path": "address-form"
+        }
+      ]
+    },
+    {
+      "root": "subpages/order",
+      "pages": [
+        {
+          "path": "order",
+          "style": {
+            "navigationBarTitleText": "填写订单"
+          }
+        },
+        {
+          "path": "orderDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "allOrder",
+          "style": {
+            "navigationBarTitleText": "订单列表"
+          }
+        }
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/my/my": {
+      "network": "all",
+      "packages": [
+        "subpages/setting",
+        "subpages/profile",
+        "subpages/address",
+        "subpages/address-form",
+        "subpages/order"
+      ]
+    },
+    "pages/cart/cart": {
+      "packages": [
+        "subpages/order"
+      ]
+    },
+    "pages/cart/cart2": {
+      "packages": [
+        "subpages/order"
+      ]
+    }
   }
 }
